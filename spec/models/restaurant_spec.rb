@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restaurant, type: :model do
   it { is_expected.to have_many :reviews }
+  it { should belong_to(:user) }
 
   it 'is not valid if the name has less than three characters' do
     restaurant = described_class.new(name: 'kf')
