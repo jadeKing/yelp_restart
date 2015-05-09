@@ -98,10 +98,4 @@ feature 'restaurants' do
     click_button 'Sign up'
   end
 
-
-
-
-
-
-
 end
