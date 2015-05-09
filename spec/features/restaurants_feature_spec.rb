@@ -32,6 +32,15 @@ feature 'restaurants' do
       expect(current_path).to eq '/restaurants'
     end
 
+    context 'a user not signed in clicks add restaurant' do
+      it 'prompts you to sign in' do
+        visit '/'
+        click_link 'add a restaurant'
+        expect(page).to have_content 'Log in'
+        expect(current_path).to eq '/users/sign_in'
+      end
+    end
+
     context 'an invalid restaurant' do
       it 'does not let you submit a form that is too short' do
         sign_up('test@test.com', 'testtest')
@@ -43,6 +52,7 @@ feature 'restaurants' do
         expect(page).to have_content 'error'
       end
     end
+
   end
 
   context 'viewing restauarants' do
@@ -57,8 +67,6 @@ feature 'restaurants' do
   end
 
   context 'editing restaurants' do
-    # before { Restaurant.create name: 'KFC' }
-
     scenario 'let a user edit a restaurant' do
       sign_up('test@test.com', 'testtest')
       Restaurant.create name: 'KFC'
@@ -72,8 +80,6 @@ feature 'restaurants' do
   end
 
   context 'deleteing restaurants' do
-    # before { Restaurant.create name: 'KFC' }
-
     scenario 'user clicks delete and removes restaurant' do
       sign_up('test@test.com', 'testtest')
       Restaurant.create name: 'KFC'
